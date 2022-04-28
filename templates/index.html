@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+    <!-- Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Rubik Mono One' rel='stylesheet'>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>AI-Powered Mask Recognition</title>
+
+    <!-- Styles -->
+    <style>
+    *{
+      font-family: 'Rubik Mono One';
+      color: #3d3d3d;
+    }
+
+    body {
+      background-color: #fdf9ec;
+      height:100vh;
+    }
+
+    #content{
+      padding: 50px;
+    }
+
+    .image{
+      max-height: 250px;
+      border: 4px solid #fff;
+    }
+
+    .result{
+      text-align: center;
+      margin-top:30px;
+    }
+
+    .heading{
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .myForm{
+      margin-top: 50px;
+      text-align: center;
+    }
+
+    #button{
+      color: black;
+    }
+
+    #footer{
+      padding: 20px;
+      background-color: #fa8857;
+    }
+    </style>
+	</head>
+	<body>
+    <div id = "content">
+      <div class = "container">
+        <!-- TODO 11: EDIT YOUR ITEM NAME BELOW -->
+        <h1 class = "heading">Are you wearing a mask?</h1>
+        <p class="heading"><i>Upload .jpg or .jpeg images only please!</i></p>
+        <p>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <ul class=flashes>
+                {% for message in messages %}
+                  <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+              {% endif %}
+            {% endwith %}
+        </p>
+        {% if filename %}
+            <div class = "text-center">
+                <img class = "image" src="{{ url_for('display_image', filename=filename) }}">
+            </div>
+        {% endif %}
+
+        {% if prediction %}
+        <div class = "container">
+            <h3 class = "result">{{ prediction }}</h3>
+        </div>
+        {% endif %}
+
+      <form class = "myForm" method="POST" enctype=multipart/form-data>
+        <input type="file" name="file">
+        <input type="submit" value="Upload" id="button">
+      </form>
+      <hr>
+      </div>
+    </div>
+
+    <div id = "footer" class = "fixed-bottom">
+      <div class = "row">
+        <div class = "col text-center">
+          <!-- TODO 12: EDIT YOUR NAME BELOW -->
+          <p> Made with &#9829; by Joanna </p>
+        </div>
+        <div class = "col">
+        </div>
+        <div class = "col text-center">
+          <a href="https://www.instagram.com/generationgirl.id/"><img src="./static/geng.png" alt="Generation Girl Logo" style="width:10%;" target="_blank"></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS Dependencies-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	</body>
+</html>
